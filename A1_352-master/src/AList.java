@@ -34,13 +34,16 @@ public class AList<E> implements ADTList<E> {
 			listArray[i] = listArray[i-1]; // to make room
 		listArray[curr] = it;
 		listSize++; // Increment list size
+		curr++;
 	}
 	
 	/** Append "it" to list */
 	public void append(E it) {
 		assert listSize < maxSize : "List capacity exceeded";
 		listArray[listSize++] = it;
+		curr++;
 	}
+
 	
 	/** Remove and return the current element */
 	public E remove() {

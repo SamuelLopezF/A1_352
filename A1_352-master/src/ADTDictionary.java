@@ -35,6 +35,8 @@ public E find(Key k);
 /** @return The number of records in the dictionary. */
 public int size();
 
+public Key getCurrentKey();
+
 
 //public int[] createDesendingIndex();
 

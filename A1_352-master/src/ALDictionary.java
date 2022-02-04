@@ -36,12 +36,6 @@ public class ALDictionary<Key, E> implements ADTDictionary<Key, E> {
 		vlist.clear();
 	}
 
-	/** Find k using sequential search
-	  @return position of key value k */
-
-
-
-
 	/**
 	 * Insert an element: append to list
 	 */
@@ -68,8 +62,9 @@ public class ALDictionary<Key, E> implements ADTDictionary<Key, E> {
 
 	/** Remove the current element */
 	public E removeAny() {
-		klist.prev();
-		vlist.prev();
+//		klist.moveToPos(klist.currPos()-1);
+//		vlist.moveToPos(klist.currPos());
+		previous();
 		if (size() != 0) {
 		  klist.remove();
 		  E temp = vlist.getValue();
@@ -85,9 +80,6 @@ public class ALDictionary<Key, E> implements ADTDictionary<Key, E> {
 	public int size() {
 		return klist.length();
 	}
-
-
-
 
 	public E[] toArray() {
 		return vlist.toArray();
@@ -149,5 +141,45 @@ public class ALDictionary<Key, E> implements ADTDictionary<Key, E> {
 		return -1;
 	}
 
+	/** this function moves the cursor
+	 * for both list to next positions
+	 */
+	public void next() {
+		klist.next();
+		vlist.next();
+	}
 
+	/** This function moves the cursor to
+	 * the next position
+	 */
+	public void previous() {
+		klist.prev();
+		vlist.prev();
+	}
+
+	/** This function moves the cursor to
+	 * the a specified index
+	 * @param pos
+	 */
+	public void moveToPosition(int pos) {
+		klist.moveToPos(pos);
+		vlist.moveToPos(pos);
+	}
+
+	/** This function moves the cursor
+	 * to the specified Key k value
+	 * using sequential search from search function
+	 * @param key
+	 */
+	public void moveToPosition(Key key) {
+		int pos = search(key);
+		moveToPosition(pos);
+	}
+
+	public Key getCurrentKey() {
+		return klist.getValue();
+	}
+	public E getCurrentValue() {
+		return vlist.getValue();
+	}
 }
