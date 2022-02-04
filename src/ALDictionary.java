@@ -37,22 +37,18 @@ public class ALDictionary<Key, E> implements ADTDictionary<Key, E> {
 	}
 
 
-
-
-	/** Find k using sequential search
-	  @return position of key value k */
-
-
 	/**
 	 * Insert an element: append to list
 	 */
 	public void insert(Key k, E e) {
-
-
-		klist.append(k);
-		vlist.append(e);
-		klist.next();
-		vlist.next();
+		if (search(k) == -1) {
+			klist.append(k);
+			vlist.append((e));
+			klist.next();
+			vlist.next();
+		}else{
+			System.out.println("item already exists");
+		}
 //		}
 	}
 
@@ -72,15 +68,12 @@ public class ALDictionary<Key, E> implements ADTDictionary<Key, E> {
 	/** Remove the current element */
 	public E removeCurrent() {
 		if (size() != 0) {
-		  klist.remove();
-		  E temp = vlist.getValue();
-		  vlist.remove();
-		  return temp;
-		}
-		else
+			klist.remove();
+			return (E) vlist.remove();
+		} else {
 			return null;
+		}
 	}
-
 
 	/** @return List size */
 	public int size() {
@@ -88,10 +81,8 @@ public class ALDictionary<Key, E> implements ADTDictionary<Key, E> {
 	}
 
 
-
-
 	public E[] toArray() {
-		return vlist.toArray();
+		return (E[]) vlist.toArray();
 	}
 
 @Override
@@ -106,7 +97,7 @@ public class ALDictionary<Key, E> implements ADTDictionary<Key, E> {
 				klist.next();
 				out.append(":");
 				out.append(vlist.getValue().toString());
-				out.append(" , ");
+				out.append(" , \n");
 				vlist.next();
 			}
 
@@ -124,9 +115,19 @@ public class ALDictionary<Key, E> implements ADTDictionary<Key, E> {
 	 */
 	public E find(Key k) {
 
-		return null;
+		int position = -1;
+		position = search(k);
+		if(position == -1) {
+			return null;
+		}else{
+			vlist.moveToPos(position);
+			E e = (E) vlist.getValue();
+			vlist.moveToPos(klist.currPos());
+			return e;
+		}
 	}
 
+	// This method is used to search a position for a given Key//
 	public int search(Key k) {
 		int original_position = klist.currPos();
 		klist.moveToStart();

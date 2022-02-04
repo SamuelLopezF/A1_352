@@ -10,31 +10,31 @@ public class Inventory {
     String inventory_id;
     String name;
     String description;
-    float unit_price;
-    int quantity;
-    float inventory_value;
-    int reorder_level;
-    int reorder_time_in_days;
-    int reorder_quantity;
-    boolean discontinued;
+    String unit_price;
+    String quantity;
+    String inventory_value;
+    String reorder_level;
+    String reorder_time_in_days;
+    String reorder_quantity;
+    String discontinued;
 
     Inventory(String[] words)
     {
         setInventory_id(words[0]);
         setName(words[1]);
         setDescription(words[2]);
-        setUnit_price(parseFloat(words[3]));
-        setQuantity(parseInt(words[4]));
-        setInventory_value(parseFloat(words[5]));
-        setReorder_level(parseInt(words[6]));
-        setReorder_time_in_days(parseInt(words[7]));
-        setReorder_quantity(parseInt(words[8]));
-        if(words.length == 10)
-        {
-            setDiscontinued(words[9]);
-        }else{
-            setDiscontinued("false");
+        setUnit_price(words[3]);
+        setQuantity(words[4]);
+        setInventory_value(words[5]);
+        setReorder_level(words[6]);
+        setReorder_time_in_days(words[7]);
+        setReorder_quantity(words[8]);
+        if (words.length == 10) {
+            setDiscontinued("yes");
+        } else {
+            setDiscontinued("no");
         }
+
     }
 
     public String getKey()
@@ -43,9 +43,9 @@ public class Inventory {
     }
 
 
-    public AList<Element> getValues()
+    public AList<String> getValues()
     {
-        AList values = new AList(10);
+        AList<String> values = new AList<>(10);
         values.insert(getName());
         values.insert(getDescription());
         values.insert(getUnit_price());
@@ -56,22 +56,6 @@ public class Inventory {
         values.insert(getReorder_quantity());
         return values;
     }
-    public int getReorder_level() {
-        return reorder_level;
-    }
-
-    public void setReorder_level(int reorder_level) {
-        this.reorder_level = reorder_level;
-    }
-
-    public int getReorder_time_in_days() {
-        return reorder_time_in_days;
-    }
-
-    public void setReorder_time_in_days(int reorder_time_in_days) {
-        this.reorder_time_in_days = reorder_time_in_days;
-    }
-
 
     public String getInventory_id() {
         return inventory_id;
@@ -97,53 +81,60 @@ public class Inventory {
         this.description = description;
     }
 
-    public float getUnit_price() {
+    public String getUnit_price() {
         return unit_price;
     }
 
-    public void setUnit_price(float unit_price) {
+    public void setUnit_price(String unit_price) {
         this.unit_price = unit_price;
     }
 
-    public int getQuantity() {
+    public String getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
 
-    public float getInventory_value() {
+    public String getInventory_value() {
         return inventory_value;
     }
 
-    public void setInventory_value(float inventory_value) {
+    public void setInventory_value(String inventory_value) {
         this.inventory_value = inventory_value;
     }
 
+    public String getReorder_level() {
+        return reorder_level;
+    }
 
+    public void setReorder_level(String reorder_level) {
+        this.reorder_level = reorder_level;
+    }
 
-    public int getReorder_quantity() {
+    public String getReorder_time_in_days() {
+        return reorder_time_in_days;
+    }
+
+    public void setReorder_time_in_days(String reorder_time_in_days) {
+        this.reorder_time_in_days = reorder_time_in_days;
+    }
+
+    public String getReorder_quantity() {
         return reorder_quantity;
     }
 
-    public void setReorder_quantity(int reorder_quantity) {
+    public void setReorder_quantity(String reorder_quantity) {
         this.reorder_quantity = reorder_quantity;
     }
 
-    public boolean isDiscontinued() {
+    public String getDiscontinued() {
         return discontinued;
     }
 
     public void setDiscontinued(String discontinued) {
-        if(discontinued.equalsIgnoreCase("yes"))
-        {
-            this.discontinued = true;
-        }else{
-            this.discontinued = false;
-        }
+        this.discontinued = discontinued;
     }
-
-
 
 }
