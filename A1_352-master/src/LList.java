@@ -8,7 +8,7 @@ public class LList<E> implements ADTList<E> {
 	protected Link<E> curr; // Access to current element
 	
 	private int cnt; // length of list
-	
+
 	/** Constructors */
 	public LList(int size) { this(); } // Constructor -- Ignore size
 	

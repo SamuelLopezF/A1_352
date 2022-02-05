@@ -18,7 +18,6 @@ public class ALDictionary<Key, E> implements ADTDictionary<Key, E> {
 	private AList<Key> klist;
 	private AList<E> vlist;
 
-	private int[] index = null;
 
 	/** Constructors */
 	ALDictionary() {
@@ -40,10 +39,14 @@ public class ALDictionary<Key, E> implements ADTDictionary<Key, E> {
 	 * Insert an element: append to list
 	 */
 	public void insert(Key k, E e) {
-		klist.append(k);
-		vlist.append(e);
-		klist.next();
-		vlist.next();
+		if(search(k) == -1) {
+			klist.append(k);
+			vlist.append(e);
+			klist.next();
+			vlist.next();
+		}else{
+			System.out.println("item already exists");
+		}
 //		}
 	}
 
@@ -169,10 +172,10 @@ public class ALDictionary<Key, E> implements ADTDictionary<Key, E> {
 	/** This function moves the cursor
 	 * to the specified Key k value
 	 * using sequential search from search function
-	 * @param key
+	 * @param k
 	 */
-	public void moveToPosition(Key key) {
-		int pos = search(key);
+	public void moveToPosition(Key k) {
+		int pos = search(k);
 		moveToPosition(pos);
 	}
 
