@@ -9,12 +9,12 @@ public class DictionaryJUnitTest {
 	
 	
 	private static ADTDictionary<Integer, String> dict;
-	  
+
 	@BeforeAll
 	public static void setUp() {
-		dict = new ALDictionary<Integer, String>(10);
-		//dict = new LLDictionary<String, InventoryRecord>(10);
-		
+		//dict = new ALDictionary<Integer, String>(10);
+		dict = new LLDictionary<Integer, String >(100);
+
 	}
 
 	@Test

@@ -30,14 +30,7 @@ public class LList<E> implements ADTList<E> {
 		
 		curr.setNext(new Link<E>(it, curr.next()));
 		
-		//Link<E> tempLink = new Link<E>(it, curr.next()); 
-		//curr.setNext(tempLink);
-		
-		 
-		
-		// Using freelist support
-		//curr.setNext(Link.get(it, curr.next()));
-		
+
 		if (tail == curr) 
 			tail = curr.next(); // New tail
 		cnt++;
@@ -59,12 +52,9 @@ public class LList<E> implements ADTList<E> {
 		if (tail == curr.next()) 
 			tail = curr; // Removed last
 		
-	    //Using freelist
-		// Link<E> tempptr = curr.next();
-		Link<E> templink = curr.next().next(); 
+		Link<E> templink = curr.next().next();
 		curr.setNext(templink); // Remove from list
-		// tempptr.release(); 
-		
+
 		cnt--; // Decrement count
 		return it; // Return value
 	}

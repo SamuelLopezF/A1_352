@@ -1,8 +1,3 @@
-import org.junit.jupiter.api.Test;
-
-import javax.lang.model.element.Element;
-
-
 /** Source code example for "A Practical Introduction to Data
 Structures and Algorithm Analysis, 3rd Edition (Java)" 
 by Clifford A. Shaffer
@@ -59,9 +54,11 @@ public class ALDictionary<Key, E> implements ADTDictionary<Key, E> {
 		if (temp != null) {
 			klist.remove();
 			vlist.remove();
+			vlist.prev();
 		}
 		klist.moveToPos(origin);
 		vlist.moveToPos(origin);
+
 		return temp;
 	}
 
@@ -69,24 +66,54 @@ public class ALDictionary<Key, E> implements ADTDictionary<Key, E> {
 	public E removeCurrent() {
 		if (size() != 0) {
 			klist.remove();
-			return (E) vlist.remove();
+			return vlist.remove();
 		} else {
 			return null;
 		}
 	}
 
+	/** Remove any element */
+	public E removeAny() {
+		int origin = klist.currPos();
+		klist.moveToStart();
+		vlist.moveToStart();
+		klist.remove();
+		E temp = vlist.remove();
+		klist.moveToPos(origin);
+		vlist.moveToPos(origin);
+		return temp;
+	}
+
+	@Override
+	public void previous() {
+
+	}
+
+	@Override
+	public void next() {
+
+	}
+
+	@Override
+	public String getCurrent() {
+		return null;
+	}
+
+
 	/** @return List size */
 	public int size() {
+		assert(klist.length() == vlist.length()): "database is inconsistent";
 		return klist.length();
 	}
 
 
 	public E[] toArray() {
-		return (E[]) vlist.toArray();
+		return (vlist.toArray());
 	}
 
 @Override
 	public String toString() {
+	System.out.println("triggering this");
 		int origin = klist.currPos();
 		klist.moveToStart();
 		vlist.moveToStart();
@@ -97,14 +124,13 @@ public class ALDictionary<Key, E> implements ADTDictionary<Key, E> {
 				klist.next();
 				out.append(":");
 				out.append(vlist.getValue().toString());
-				out.append(" , \n");
+				out.append(" >\n");
 				vlist.next();
 			}
 
 			klist.moveToPos(origin);
 			vlist.moveToPos(origin);
 			return out.toString().trim();
-
 	}
 
 
@@ -112,16 +138,17 @@ public class ALDictionary<Key, E> implements ADTDictionary<Key, E> {
 	 * Find k using sequential search
 	 *
 	 * @return Record with key value k
+	 * using the find functionsa
 	 */
 	public E find(Key k) {
 
-		int position = -1;
-		position = search(k);
+
+		int position = search(k);
 		if(position == -1) {
 			return null;
 		}else{
 			vlist.moveToPos(position);
-			E e = (E) vlist.getValue();
+			E e = vlist.getValue();
 			vlist.moveToPos(klist.currPos());
 			return e;
 		}
